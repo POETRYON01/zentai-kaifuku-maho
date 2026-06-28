@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全体回復魔法 | 出演者募集</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400&display=swap');
+
+  :root {
+    --bg: #0d0b14;
+    --bg2: #13101f;
+    --purple-deep: #1a1428;
+    --purple-glow: #7b4fae;
+    --purple-light: #b48be0;
+    --white: #f0eaf8;
+    --white-dim: #c8bedd;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(123,79,174,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(60,30,90,0.15) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .hero {
+    padding: 80px 0 64px;
+    text-align: center;
+  }
+
+  .hero-presents {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--purple-light);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(36px, 8vw, 56px);
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  .hero-kana {
+    display: block;
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    color: var(--white-dim);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    margin-top: 10px;
+  }
+
+  .hero-sub {
+    font-size: 13px;
+    color: var(--white-dim);
+    letter-spacing: 0.1em;
+    margin-top: 8px;
+  }
+
+  .divider {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, transparent, var(--purple-glow), transparent);
+    margin: 40px auto;
+  }
+
+  .concept {
+    padding: 0 0 64px;
+    text-align: center;
+  }
+
+  .concept-text {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(15px, 3vw, 18px);
+    font-weight: 300;
+    line-height: 2.2;
+    color: var(--white-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .concept-text em {
+    color: var(--white);
+    font-style: normal;
+  }
+
+  .info-section {
+    background: var(--purple-deep);
+    border: 1px solid rgba(123,79,174,0.2);
+    border-radius: 2px;
+    padding: 40px 36px;
+    margin-bottom: 48px;
+  }
+
+  .info-section h2, .block h2 {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--purple-light);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .info-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px 24px;
+    margin-bottom: 16px;
+    align-items: start;
+  }
+
+  .info-row:last-child { margin-bottom: 0; }
+
+  .info-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--purple-light);
+    padding-top: 2px;
+  }
+
+  .info-value {
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.7;
+  }
+
+  .info-value small {
+    display: block;
+    font-size: 12px;
+    color: var(--white-dim);
+    margin-top: 4px;
+  }
+
+  /* タイムテーブル */
+  .timetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4px;
+  }
+
+  .timetable tr {
+    border-bottom: 1px solid rgba(123,79,174,0.1);
+  }
+
+  .timetable tr:last-child {
+    border-bottom: none;
+  }
+
+  .timetable td {
+    padding: 10px 0;
+    font-size: 13px;
+    color: var(--white-dim);
+  }
+
+  .timetable td:first-child {
+    color: var(--purple-light);
+    letter-spacing: 0.1em;
+    width: 80px;
+    font-size: 12px;
+  }
+
+  /* 出演メリット */
+  .block {
+    background: var(--bg2);
+    border: 1px solid rgba(123,79,174,0.15);
+    border-radius: 2px;
+    padding: 40px 36px;
+    margin-bottom: 24px;
+  }
+
+  .merit-item {
+    border-left: 1px solid var(--purple-glow);
+    padding: 0 0 28px 24px;
+    position: relative;
+  }
+
+  .merit-item::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--purple-glow);
+    border-radius: 50%;
+    position: absolute;
+    left: -3px;
+    top: 6px;
+  }
+
+  .merit-item:last-child { padding-bottom: 0; }
+
+  .merit-title {
+    font-size: 14px;
+    color: var(--white);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .merit-desc {
+    font-size: 13px;
+    color: var(--white-dim);
+    line-height: 1.7;
+  }
+
+  .note-box {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(123,79,174,0.08);
+    border: 1px solid rgba(123,79,174,0.15);
+    border-radius: 2px;
+    font-size: 13px;
+    color: var(--white-dim);
+    line-height: 1.9;
+  }
+
+  .about-text {
+    font-size: 13px;
+    color: var(--white-dim);
+    line-height: 1.9;
+  }
+
+  .about-text a {
+    color: var(--purple-light);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(180,139,224,0.3);
+    padding-bottom: 2px;
+  }
+
+  .cta {
+    text-align: center;
+    padding: 0 0 80px;
+  }
+
+  .cta-text {
+    font-size: 13px;
+    color: var(--white-dim);
+    margin-bottom: 24px;
+    line-height: 1.8;
+  }
+
+  .cta-contact {
+    font-size: 13px;
+    color: var(--white-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .cta-contact a {
+    color: var(--purple-light);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(180,139,224,0.3);
+    padding-bottom: 2px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 24px 0 40px;
+    border-top: 1px solid rgba(123,79,174,0.15);
+    font-size: 11px;
+    color: rgba(180,139,224,0.4);
+    letter-spacing: 0.15em;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="hero">
+    <h1 class="hero-title">
+      <span class="hero-presents">POETRY ON presents</span>
+      全体回復魔法
+      <span class="hero-kana">（ぜんたいかいふくまほう）</span>
+    </h1>
+    <p class="hero-sub">2026年9月下旬〜10月 金曜夜 / 渋谷 gee-ge.（仮）</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="concept">
+    <p class="concept-text">
+      全体回復魔法のできる仲間がいれば、<br>
+      <em>人生中盤戦も怖くない。</em>
+    </p>
+  </div>
+
+  <div class="info-section">
+    <h2>Event Info</h2>
+    <div class="info-row">
+      <span class="info-label">日程</span>
+      <span class="info-value">2026年9月下旬〜10月 金曜日（仮）<small>確定次第お知らせします</small></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">会場</span>
+      <span class="info-value">渋谷 gee-ge.（仮）<small>渋谷駅より徒歩約10分</small></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">形式</span>
+      <span class="info-value">女性シンガーソングライター 5組<small>全着席・テーブルなし 80人キャパ</small></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">チケット</span>
+      <span class="info-value">¥3,300 + ドリンク代 ¥700</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">タイムテーブル</span>
+      <span class="info-value">
+        <table class="timetable">
+          <tr><td>17:30</td><td>OPEN</td></tr>
+          <tr><td>18:00</td><td>1組目</td></tr>
+          <tr><td>18:30</td><td>2組目</td></tr>
+          <tr><td>19:00</td><td>3組目</td></tr>
+          <tr><td>19:30</td><td>4組目</td></tr>
+          <tr><td>20:00</td><td>5組目</td></tr>
+          <tr><td>20:30</td><td>終演後物販</td></tr>
+          <tr><td>21:30</td><td>END</td></tr>
+        </table>
+      </span>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>出演メリット</h2>
+    <div class="merit-item">
+      <p class="merit-title">チケットバック</p>
+      <p class="merit-desc">ご自身で販売したチケットが6枚目以降、1枚あたり50%（¥1,650）をお渡しします。</p>
+    </div>
+    <div class="merit-item">
+      <p class="merit-title">ノルマなし</p>
+      <p class="merit-desc">チケットの買い取り・持ち出しはありません。</p>
+    </div>
+    <div class="merit-item">
+      <p class="merit-title">終演後物販あり</p>
+      <p class="merit-desc">CD・グッズ等の販売が可能です。</p>
+    </div>
+    <div class="merit-item">
+      <p class="merit-title">エンタメメディア POETRY ON への露出</p>
+      <p class="merit-desc">事前アンケートをもとに、当日に向けたWEBコンテンツへ出演いただきます。</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>出演条件</h2>
+    <p class="about-text">
+      ・女性シンガーソングライターの方<br><br>
+      ・WEBコンテンツ制作へのご協力をいただける方<br>
+      主催のエンタメメディア「POETRY ON（ポエトリー・オン）」にて、当日につながるWEB記事を公開いたします。
+    </p>
+    <div class="note-box">
+      【出演者様の対応事項】<br>
+      ・事前の簡単なアンケートにご協力<br>
+      （自己紹介、最近のエピソード、当日の意気込みなど数問程度）<br>
+      ・アー写など、記事掲載用の写真を提供<br><br>
+      みなさまのアンケート回答をまとめた記事を、事前にメディア内にて公開いたします。
+    </div>
+  </div>
+
+  <div class="block">
+    <h2>About POETRY ON</h2>
+    <p class="about-text">
+      <strong>POETRY ON（ポエトリー・オン）</strong><br>
+      「ガールズカルチャー×新視点」を中心にコンテンツを届けるエンタメメディア。アイドル・ライブ音楽を軸に、フォトエッセイ型インタビュー連載「余白に佇む人。」などの独自記事を展開しています。<br><br>
+      <a href="https://entame01.com/" target="_blank">entame01.com</a>
+    </p>
+  </div>
+
+  <div class="block">
+    <h2>主催者より</h2>
+    <p class="about-text">
+      "人生中盤戦"ともいえる人々は、回復魔法を唱えられる仲間を常に探しています。<br>
+      家族と孤独と理不尽、言葉にできない葛藤のようなもの。それらを抱えながら生きるためには、HPを回復する手段が必要だからです。<br><br>
+      日々、会場全体を癒す「全体回復魔法」を唱えているシンガーソングライターのみなさまへ。どうか一夜だけ、その不思議な力を貸してください。
+    </p>
+  </div>
+
+  <div class="cta">
+    <p class="cta-text">
+      ご興味をお持ちいただけた方、<br>
+      まずはお気軽にご連絡ください。
+    </p>
+    <p class="cta-contact">
+      お問い合わせ：<a href="mailto:contact@lemocle.jp">contact@lemocle.jp</a>
+    </p>
+  </div>
+
+  <div class="footer">POETRY ON / 合同会社レモクル</div>
+
+</div>
+</body>
+</html>
